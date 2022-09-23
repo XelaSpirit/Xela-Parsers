@@ -19,8 +19,8 @@
 #include <iostream>
 #include <filesystem>
 
-#define _XELA_JX_START namespace Xela {  extern "C" {
-#define _XELA_JX_END } }
+#define _XELA_XML_START namespace Xela {  extern "C" {
+#define _XELA_XML_END } }
 
 class xml_file_error : public std::runtime_error {
 public:
@@ -33,7 +33,7 @@ public:
 	xml_parse_error(const char *str) : runtime_error(str) {}
 };
 
-_XELA_JX_START // C style structs and functions
+_XELA_XML_START // C style structs and functions
 class Xml {
 public:
 	using AttrMap = std::unordered_map<std::string, std::string>;
@@ -91,16 +91,16 @@ public:
 	void addChild(Xml *child);
 	void removeChild(Xml *child);
 };
-_XELA_JX_END
+_XELA_XML_END
 
 #endif
 
-#define XELA_XML_IMPLEMENTATION
+// #define XELA_XML_IMPLEMENTATION
 #ifdef XELA_XML_IMPLEMENTATION
 
 #define XML_ERR(line, col) std::string("Xml [" + std::to_string(line) + ", " + std::to_string(col) + "]: ") +
 
-_XELA_JX_START //C style structs and functions
+_XELA_XML_START //C style structs and functions
 
 void Xml::consumeWhitespace(std::istream &in, size_t &line, size_t &col) {
 	while (std::isspace(in.peek())) {
@@ -515,5 +515,5 @@ void Xml::removeChild(Xml *child) {
 	}
 }
 
-_XELA_JX_END
+_XELA_XML_END
 #endif

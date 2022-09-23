@@ -8,6 +8,9 @@
 #define XELA_XML_IMPLEMENTATION
 #include "XelaXml.hpp";
 
+#define XELA_XSS_IMPLEMENTATION
+#include "XelaStyleSheet.hpp"
+
 TEST(Json, String) {
 	std::string str = "\"Hello\"";
 	std::string expect = "Hello";
@@ -345,13 +348,13 @@ TEST(Json, File) {
 	EXPECT_EQ(map.find("Two")->second->asInt(), 2);
 }
 TEST(Json, Write) {
-	std::string str = "{ \"one\": [ 1, 2, 3, 4 ], \"two\": 2 }";
+	std::string str = "{ \"one\": [ 1, 2, 3, 4 ], \"two\": \" 2 \" }";
 	Xela::Json *val = Xela::Json::fromString(str);
 
 	std::stringstream stream = std::stringstream();
 	val->write(false, stream);
 
-	ASSERT_EQ(stream.str(), std::string("{\"one\":[1,2,3,4],\"two\":2}"));
+	ASSERT_EQ(stream.str(), std::string("{\"one\":[1,2,3,4],\"two\":\" 2 \"}"));
 }
 TEST(Json, Empty) {
 	Xela::Json *obj = Xela::Json::fromType(Xela::Json::Type::Object);
@@ -492,4 +495,13 @@ TEST(Xml, Comment) {
 	ASSERT_TRUE(comment->isComment());
 	ASSERT_EQ(comment->getAttributes().size(), 0);
 	ASSERT_EQ(comment->getChildren().size(), 0);
+}
+
+// TODO - Test Xss
+TEST(Xss, Root) {
+	std::string xss = "";
+
+	Xela::Xss *val = Xela::Xss::fromString(xss);
+
+	ASSERT_NE(val, nullptr);
 }

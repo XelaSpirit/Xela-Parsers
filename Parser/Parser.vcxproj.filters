@@ -21,5 +21,8 @@
     <ClInclude Include="XelaXml.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="XelaStyleSheet.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

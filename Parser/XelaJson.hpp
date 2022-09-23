@@ -598,14 +598,10 @@ void Json::writeArray(Json *val, std::ostream &out, size_t indent, bool pretty) 
 
 	writeTab(out, indent);
 	out << "]";
-
-	if (pretty) {
-		out << "\n";
-	}
 }
 void Json::writeString(Json *val, std::ostream &out, size_t indent, bool pretty) {
 	writeTab(out, indent);
-	out << val->asString();
+	out << "\"" << val->asString() << "\"";
 }
 void Json::writeInteger(Json *val, std::ostream &out, size_t indent, bool pretty) {
 	writeTab(out, indent);
