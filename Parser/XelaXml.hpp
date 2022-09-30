@@ -168,7 +168,7 @@ std::string Xml::parseString(std::istream &in, size_t &line, size_t &col) {
 	char c = in.get();
 	col++;
 	if (c != '"') {
-		throw xml_parse_error(XML_ERR(line, col) "Unexpected token while parsing string: " + c + "Expected '\"'");
+		throw xml_parse_error(XML_ERR(line, col) "Unexpected token while parsing string: " + c + ". Expected '\"'");
 	}
 
 	for (c = in.get(); c != '\"'; c = in.get()) {
